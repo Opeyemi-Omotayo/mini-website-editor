@@ -1,9 +1,11 @@
+import Home from "./pages/Home";
+
 function App() {
   return (
-    <main className="bg-red-200">
-     <h1 >hello world</h1>
+    <main className="bg-grey-50">
+      <Home />
     </main>
-  )
+  );
 }
 
-export default App
+export default App;

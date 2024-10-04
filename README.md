@@ -1,4 +1,36 @@
-# React + TypeScript + Vite
+# Mini Website Editor 🖥️
+
+This is a simple website editor created with React 
+
+
+## Features ➹
+
+- Text Formatting
+- Embed youtube video and images
+
+
+## Technologies 🛠️
+
+- React + Vite + Typescript
+- React-hot-toast
+- Tailwind
+
+
+## Get started
+
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app
+
+   ```bash
+    npx run dev
+   ```
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

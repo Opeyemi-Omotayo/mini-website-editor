@@ -1,10 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Embeds from "./Embeds";
 import { useEditor } from "../context/EditorContext";
+import {
+  CiTextAlignCenter,
+  CiTextAlignLeft,
+  CiTextAlignRight,
+} from "react-icons/ci";
 
 const CustomTextEditor: React.FC = () => {
-  const [content, setContent] = useState<string>("");
-  const { toggleEmbeds, showEmbed, image } = useEditor();
+  const { toggleEmbeds, image, video, content, setContent } = useEditor();
   const [isEditing, setIsEditing] = useState(false);
   const [fontStyle, setFontStyle] = useState<{
     bold: boolean;
@@ -16,7 +20,12 @@ const CustomTextEditor: React.FC = () => {
     underline: false,
   });
 
+  const [textAlign, setTextAlign] = useState<"left" | "center" | "right">(
+    "left"
+  );
+
   const editorRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
@@ -42,6 +51,17 @@ const CustomTextEditor: React.FC = () => {
       [style]: !prev[style],
     }));
   };
+
+  const handleAlignment = (alignment: "left" | "center" | "right") => {
+    setTextAlign(alignment);
+  };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"; 
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"; 
+    }
+  }, [content]);
 
   return (
     <div>
@@ -71,15 +91,25 @@ const CustomTextEditor: React.FC = () => {
           >
             U
           </button>
+          <button className={`px-4 py-1 ${textAlign === "center" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("center")}>
+            <CiTextAlignCenter />
+          </button>
+          <button className={`px-4 py-1 ${textAlign === "left" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("left")}>
+            <CiTextAlignLeft />
+          </button>
+          <button className={`px-4 py-1 ${textAlign === "right" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("right")}>
+            <CiTextAlignRight />
+          </button>
         </div>
       )}
       {isEditing ? (
         <textarea
-          className={`outline-none bg-gray-100 text-sm w-full border-none min-h-8  ${
+          ref={textareaRef}
+          className={`outline-none bg-gray-100 text-sm w-full border-none resize-none min-h-8 ${
             fontStyle.bold ? "font-bold" : ""
           } ${fontStyle.italic ? "italic" : ""} ${
             fontStyle.underline ? "underline" : ""
-          }`}
+          } text-${textAlign}`}
           value={content}
           onChange={handleInput}
           onBlur={handleBlur}
@@ -87,17 +117,36 @@ const CustomTextEditor: React.FC = () => {
         />
       ) : (
         <p
-          className={`w-full text-sm  min-h-8 ${
+          className={`w-full text-sm min-h-8 whitespace-pre-wrap break-words ${
             fontStyle.bold ? "font-bold" : ""
           } ${fontStyle.italic ? "italic" : ""} ${
             fontStyle.underline ? "underline" : ""
-          }`}
+          } text-${textAlign}`}
           onClick={handleClick}
         >
           {content === "" ? "Add content" : content}
         </p>
       )}
-     {image && <img src={image} alt="uploaded" className=" h-[220px] lg:h-[280px] w-full" />}
+
+      {video ? (
+        <iframe
+          width="100%"
+          height="300"
+          src={video}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Embedded Video"
+        ></iframe>
+      ) : (
+        image && (
+          <img
+            src={image}
+            alt="uploaded"
+            className="h-[220px] lg:h-[280px] w-full"
+          />
+        )
+      )}
+
       {content && (
         <button
           onClick={toggleEmbeds}
@@ -106,7 +155,8 @@ const CustomTextEditor: React.FC = () => {
           +
         </button>
       )}
-      {showEmbed && content && <Embeds />}
+
+      <Embeds />
     </div>
   );
 };

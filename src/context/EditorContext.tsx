@@ -9,6 +9,11 @@ interface EditorContextProps {
   toggleEmbeds: () => void;
   image: string | null;
   setImage:Dispatch<SetStateAction<string | null>>;
+  video: string | null;  
+  setVideo: Dispatch<SetStateAction<string | null>>;
+  showModal: string | null;
+  handleEmbedModal: (embedType: string) => void;
+  closeModal: () => void;
 }
 
 interface EditorProviderProps {
@@ -22,13 +27,23 @@ export const EditorProvider: React.FC<EditorProviderProps> = ({ children }) => {
   const [content, setContent] = useState<string>("");
   const [showEmbed, setShowEmbed] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null); 
+  const [video, setVideo] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<string | null>(null);
 
   const toggleEmbeds = () => {
     setShowEmbed((prev) => !prev);
   };
 
+  const handleEmbedModal = (embedType: string) => {
+    setShowModal(embedType);
+  };
+
+  const closeModal = () => {
+    setShowModal(null);
+  };
+
   return (
-    <EditorContext.Provider value={{ title, setTitle, content, setContent, toggleEmbeds, showEmbed, image, setImage }}>
+    <EditorContext.Provider value={{ title, setTitle, content, setContent, toggleEmbeds, showEmbed, image, setImage, video, setVideo, showModal, handleEmbedModal, closeModal }}>
       {children}
     </EditorContext.Provider>
   );

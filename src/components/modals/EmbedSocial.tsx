@@ -1,16 +1,19 @@
-import React, {useState} from 'react'
-import ModalWrapper from './ModalWrapper'
+import React, { useState } from "react";
+import ModalWrapper from "./ModalWrapper";
 
 const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-    const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleToggle = () => {
     setIsDisabled((prev) => !prev);
   };
+
   return (
-   <ModalWrapper>
-  <div className="mb-4">
-        <p className="text-gray-500 mb-2 text-sm uppercase">social media platform</p>
+    <ModalWrapper>
+      <div className="mb-4">
+        <p className="text-gray-500 mb-2 text-sm uppercase">
+          social media platform
+        </p>
         <select className="bg-gray-100 outline-none rounded-sm p-3 w-full">
           <option value="facebook">Facebook</option>
           <option value="instagram">Instagram</option>
@@ -33,22 +36,22 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         />
       </div>
       <div className="flex items-center justify-between mb-4">
-      <p className="text-gray-500">Disable caption</p>
-      <label className="relative inline-flex items-center cursor-pointer">
-        <input
-          type="checkbox"
-          className="sr-only"
-          checked={isDisabled}
-          onChange={handleToggle}
-        />
-        <div className="w-8 h-4 bg-gray-200 rounded-full shadow-inner"></div>
-        <div
-          className={`absolute left-0 w-4 h-4 transition transform bg-white rounded-full shadow ${
-            isDisabled ? 'translate-x-full bg-green-600' : ''
-          }`}
-        ></div>
-      </label>
-    </div>
+        <p className="text-gray-500">Disable caption</p>
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            className="sr-only"
+            checked={isDisabled}
+            onChange={handleToggle}
+          />
+          <div className="w-8 h-4 bg-gray-200 rounded-full shadow-inner"></div>
+          <div
+            className={`absolute left-0 w-4 h-4 transition transform bg-white rounded-full shadow ${
+              isDisabled ? "translate-x-full bg-green-600" : ""
+            }`}
+          ></div>
+        </label>
+      </div>
       <div className="">
         <button
           onClick={onClose}
@@ -63,8 +66,8 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           Cancel
         </button>
       </div>
-   </ModalWrapper>
-  )
-}
+    </ModalWrapper>
+  );
+};
 
-export default EmbedSocial
+export default EmbedSocial;

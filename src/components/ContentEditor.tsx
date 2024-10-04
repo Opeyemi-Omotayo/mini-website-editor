@@ -105,7 +105,7 @@ const CustomTextEditor: React.FC = () => {
       {isEditing ? (
         <textarea
           ref={textareaRef}
-          className={`outline-none bg-gray-100 text-sm w-full border-none resize-none min-h-8 ${
+          className={`outline-none bg-gray-100 mb-1.5 text-sm w-full border-none resize-none min-h-8 ${
             fontStyle.bold ? "font-bold" : ""
           } ${fontStyle.italic ? "italic" : ""} ${
             fontStyle.underline ? "underline" : ""
@@ -117,7 +117,7 @@ const CustomTextEditor: React.FC = () => {
         />
       ) : (
         <p
-          className={`w-full text-sm min-h-8 whitespace-pre-wrap break-words ${
+          className={`w-full text-sm min-h-8 mb-1.5 whitespace-pre-wrap break-words ${
             fontStyle.bold ? "font-bold" : ""
           } ${fontStyle.italic ? "italic" : ""} ${
             fontStyle.underline ? "underline" : ""

@@ -15,6 +15,7 @@ This is a simple website editor created with React
 - React-hot-toast
 - Tailwind
 
+## Live URL: https://mini-website-editor.vercel.app/
 
 ## Get started
 

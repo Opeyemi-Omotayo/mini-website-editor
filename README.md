@@ -27,7 +27,7 @@ This is a simple website editor created with React
 2. Start the app
 
    ```bash
-    npx run dev
+    npm run dev
    ```
 
 ## React + TypeScript + Vite

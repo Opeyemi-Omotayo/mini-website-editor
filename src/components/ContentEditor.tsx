@@ -97,7 +97,7 @@ const CustomTextEditor: React.FC = () => {
           <button className={`px-4 py-1 ${textAlign === "left" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("left")}>
             <CiTextAlignLeft />
           </button>
-          <button className={`px-4 py-1 ${textAlign === "right" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("right")}>
+          <button className={`px-4 py-1 mt-1.5 ${textAlign === "right" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("right")}>
             <CiTextAlignRight />
           </button>
         </div>

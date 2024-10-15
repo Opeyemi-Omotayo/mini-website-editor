@@ -8,7 +8,13 @@ import {
 } from "react-icons/ci";
 
 const CustomTextEditor: React.FC = () => {
-  const { toggleEmbeds, image, video, content, setContent } = useEditor();
+  const {
+    toggleEmbeds,
+    image,
+    video,
+    content,
+    setContent,
+  } = useEditor();
   const [isEditing, setIsEditing] = useState(false);
   const [fontStyle, setFontStyle] = useState<{
     bold: boolean;
@@ -28,7 +34,9 @@ const CustomTextEditor: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
+    if (textareaRef.current) {
+      setContent(event.target.value);
+    }
   };
 
   const handleClick = () => {
@@ -58,75 +66,94 @@ const CustomTextEditor: React.FC = () => {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"; 
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"; 
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
     }
   }, [content]);
 
   return (
-    <div>
-      {content && (
-        <div className="flex space-x-2 mb-2 p-2 bg-white transition-all duration-1000 ease-in-out">
-          <button
-            className={`px-4 py-1 font-bold ${
-              fontStyle.bold ? "bg-gray-100 rounded-md" : ""
-            }`}
-            onClick={() => toggleStyle("bold")}
-          >
-            B
-          </button>
-          <button
-            className={`px-4 py-1 italic ${
-              fontStyle.italic ? "bg-gray-100 rounded-md" : ""
-            }`}
-            onClick={() => toggleStyle("italic")}
-          >
-            I
-          </button>
-          <button
-            className={`px-4 py-1 underline ${
-              fontStyle.underline ? "bg-gray-100 rounded-md" : ""
-            }`}
-            onClick={() => toggleStyle("underline")}
-          >
-            U
-          </button>
-          <button className={`px-4 py-1 ${textAlign === "center" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("center")}>
-            <CiTextAlignCenter />
-          </button>
-          <button className={`px-4 py-1 ${textAlign === "left" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("left")}>
-            <CiTextAlignLeft />
-          </button>
-          <button className={`px-4 py-1 mt-1.5 ${textAlign === "right" && "bg-gray-100 rounded-md" }`} onClick={() => handleAlignment("right")}>
-            <CiTextAlignRight />
-          </button>
-        </div>
-      )}
-      {isEditing ? (
-        <textarea
-          ref={textareaRef}
-          className={`outline-none bg-gray-100 mb-1.5 text-sm w-full border-none resize-none min-h-8 ${
-            fontStyle.bold ? "font-bold" : ""
-          } ${fontStyle.italic ? "italic" : ""} ${
-            fontStyle.underline ? "underline" : ""
-          } text-${textAlign}`}
-          value={content}
-          onChange={handleInput}
-          onBlur={handleBlur}
-          autoFocus
-        />
-      ) : (
-        <p
-          className={`w-full text-sm min-h-8 mb-1.5 whitespace-pre-wrap break-words ${
-            fontStyle.bold ? "font-bold" : ""
-          } ${fontStyle.italic ? "italic" : ""} ${
-            fontStyle.underline ? "underline" : ""
-          } text-${textAlign}`}
-          onClick={handleClick}
+    <div className="font-openSans">
+      <div
+        className={`transition-all duration-1000 ease-out flex space-x-2 mb-2 bg-white border border-emerald150 rounded-md shadow-sm shadow-green-50 overflow-hidden ${
+          content ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <button
+          className={`px-4 py-1 ml-2 my-2 font-bold ${
+            fontStyle.bold ? "bg-gray-100 rounded-md" : ""
+          }`}
+          onClick={() => toggleStyle("bold")}
         >
-          {content === "" ? "Add content" : content}
-        </p>
-      )}
+          B
+        </button>
+        <button
+          className={`px-4 py-1 my-2 italic ${
+            fontStyle.italic ? "bg-gray-100 rounded-md" : ""
+          }`}
+          onClick={() => toggleStyle("italic")}
+        >
+          I
+        </button>
+        <button
+          className={`px-4 py-1 my-2 underline ${
+            fontStyle.underline ? "bg-gray-100 rounded-md" : ""
+          }`}
+          onClick={() => toggleStyle("underline")}
+        >
+          U
+        </button>
+        <span className="border-r-2" />
+        <button
+          className={`px-4 py-1 my-2 ${
+            textAlign === "center" && "bg-gray-100 rounded-md"
+          }`}
+          onClick={() => handleAlignment("center")}
+        >
+          <CiTextAlignCenter />
+        </button>
+        <button
+          className={`px-4 py-1 my-2 ${
+            textAlign === "left" && "bg-gray-100 rounded-md"
+          }`}
+          onClick={() => handleAlignment("left")}
+        >
+          <CiTextAlignLeft />
+        </button>
+        <button
+          className={`px-4 py-1 my-2 mt-1.5 ${
+            textAlign === "right" && "bg-gray-100 rounded-md "
+          }`}
+          onClick={() => handleAlignment("right")}
+        >
+          <CiTextAlignRight />
+        </button>
+      </div>
+     {isEditing ? (
+       <textarea
+         ref={textareaRef}
+         className={`outline-none bg-[#FAFAFA] mb-1.5 text-sm text-[#343E37] w-full border-none resize-none min-h-8 ${
+           fontStyle.bold ? "font-bold" : ""
+         } ${fontStyle.italic ? "italic" : ""} ${
+           fontStyle.underline ? "underline" : ""
+         } text-${textAlign}`}
+         value={content}
+         onChange={handleInput}
+         onBlur={handleBlur}
+         autoFocus
+       />
+     ) : (
+       <p
+         className={`w-full text-sm mb-1.5 ${content === "" ? "text-[#CCCFCD]" : "text-[#343E37]"} whitespace-pre-wrap break-words ${
+           fontStyle.bold ? "font-bold" : ""
+         } ${fontStyle.italic ? "italic" : ""} ${
+           fontStyle.underline ? "underline" : ""
+         } text-${textAlign} min-h-8 overflow-y-auto`}
+         onClick={handleClick}
+       >
+         {content === "" ? "Add content" : content}
+       </p>
+     )}
 
       {video ? (
         <iframe
@@ -150,7 +177,7 @@ const CustomTextEditor: React.FC = () => {
       {content && (
         <button
           onClick={toggleEmbeds}
-          className="bg-emerald-50 text-xl text-center text-gray-600 px-3 py-1 rounded-[50%]"
+          className="bg-emerald150 text-xl text-center text-gray-600 px-3 py-1 my-2 rounded-[50%]"
         >
           +
         </button>

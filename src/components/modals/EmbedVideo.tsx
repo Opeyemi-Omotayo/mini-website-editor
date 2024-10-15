@@ -25,36 +25,35 @@ const EmbedVideo: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       setError("Please enter a valid video URL.");
     }
   };
-
   return (
     <ModalWrapper>
       <div className="mb-4">
-        <p className="text-gray-500 mb-2 text-sm uppercase">Video provider</p>
-        <select className="bg-gray-100 outline-none rounded-sm p-3 w-full">
+        <p className="text-gray-500 mb-2 text-xs uppercase">Video provider</p>
+        <select className="bg-grey100 border border-emerald150 hover:border-primary100 focus:border-primary100 outline-none rounded-md p-3 w-full">
           <option value="youtube">Youtube</option>
         </select>
       </div>
       <div className="mb-4">
-        <p className="text-gray-500 mb-2 text-sm uppercase">URL</p>
+        <p className="text-gray-500 mb-2 text-xs uppercase">URL</p>
         <input
-          className="bg-gray-100 outline-none rounded-sm p-3 w-full"
+          className={`bg-grey100 border border-emerald150 ${error ? "border-red700" : ""} hover:border-primary100 focus:border-primary100 outline-none rounded-md p-3 w-full`}
           type="url"
           placeholder="Enter video URL"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
         />
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       </div>
       <div className="">
         <button
           onClick={handleEmbedClick}
-          className="bg-green-700 shadow hover:bg-green-600 text-white px-4 py-2 rounded-md"
+          className="bg-primary text-sm font-semibold shadow hover:bg-primary500 text-white px-4 py-2 rounded-md"
         >
           Embed
         </button>
         <button
           onClick={onClose}
-          className="border border-gray-300 hover:border-gray-300 ml-3 px-4 py-2 rounded-md"
+          className="border border-emerald250 hover:border-primary hover:text-primary text-gray-600 font-semibold text-sm ml-3 px-4 py-2 rounded-md"
         >
           Cancel
         </button>

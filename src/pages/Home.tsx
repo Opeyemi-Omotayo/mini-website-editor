@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <div className="">
+      <div className="font-openSans">
         {isEditing ? (
           <input
             type="text"
@@ -29,11 +29,11 @@ const Home = () => {
             onChange={handleInputChange}
             onBlur={handleBlur}
             autoFocus 
-            className="text-xl font-bold py-3 bg-gray-100  outline-none w-full"
+            className="text-xl lg:text-2xl font-bold py-3 bg-gray-100  outline-none w-full"
           />
         ) : (
           <h1
-            className="text-xl font-bold py-3"
+            className="text-xl lg:text-2xl font-bold py-3 "
             onClick={handleTitleClick}
           >
             {title}

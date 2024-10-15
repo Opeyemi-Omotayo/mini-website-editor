@@ -28,11 +28,9 @@ const Embeds = () => {
     },
   ];
 
-
   return (
     <div>
-      {showEmbed && content && (
-        <div className="bg-white shadow-sm w-[60%] lg:w-[40%] text-sm rounded-md ">
+        <div className={` bg-white shadow-sm w-[60%] lg:w-[40%] text-sm rounded-md transition duration-300 ease-out ${showEmbed && content ? "opacity-100" : "opacity-0"} hidden"}`}>
           <p className="uppercase font-normal text-gray-500 p-3 border border-gray-100 ">
             Embeds
           </p>
@@ -40,7 +38,7 @@ const Embeds = () => {
             <div
               key={index}
               onClick={() => handleEmbedModal(embed.title)}
-              className="text-sm flex items-start p-2 hover:bg-emerald-50 cursor-pointer"
+              className="text-sm flex items-start p-2 hover:bg-emerald150 cursor-pointer transition duration-300 ease-out"
             >
               <div className="mr-3">{embed.icon}</div>
               <div>
@@ -54,7 +52,6 @@ const Embeds = () => {
           {showModal === "Video" && <EmbedVideo onClose={closeModal} />}
           {showModal === "Social" && <EmbedSocial onClose={closeModal} />}
         </div>
-      )}
     </div>
   );
 };

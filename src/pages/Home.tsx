@@ -5,7 +5,7 @@ import ContentEditor from "../components/ContentEditor";
 
 const Home = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const { title, content, setTitle, setContent } = useEditor();
+  const { title, setTitle } = useEditor();
 
   const handleTitleClick = () => {
     setIsEditing(true);
@@ -29,7 +29,7 @@ const Home = () => {
             onChange={handleInputChange}
             onBlur={handleBlur}
             autoFocus 
-            className="text-xl lg:text-2xl font-bold py-3 bg-gray-100  outline-none w-full"
+            className="text-xl lg:text-2xl font-bold py-3 bg-[#FAFAFA]  outline-none w-full"
           />
         ) : (
           <h1

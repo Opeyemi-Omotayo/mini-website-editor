@@ -7,7 +7,16 @@ interface WrapperProps {
 }
 
 const Wrapper = ({ children }: WrapperProps) => {
-  const { content, title, image, video } = useEditor();
+  const {
+    content,
+    title,
+    image,
+    video,
+    setContent,
+    setImage,
+    setVideo,
+    setTitle,
+  } = useEditor();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const getWordCount = (text: string | null) => {
@@ -15,8 +24,12 @@ const Wrapper = ({ children }: WrapperProps) => {
   };
 
   const handlePost = () => {
-      setIsButtonClicked(true);
-      toast.success("Successful🎉");
+    setIsButtonClicked(true);
+    setContent("");
+    setImage("");
+    setVideo("");
+    setTitle("Add post title");
+    toast.success("Successful🎉");
   };
 
   return (

@@ -5,7 +5,8 @@ const CustomDropdown: React.FC<{
   platform: string;
   errors: { platform: string };
   handlePlatformChange: (value: string) => void;
-}> = ({ platform, errors, handlePlatformChange }) => {
+  platformOptions: any
+}> = ({ platform, errors, handlePlatformChange, platformOptions }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState(platform);
 
@@ -30,18 +31,15 @@ const CustomDropdown: React.FC<{
 
       {isOpen && (
         <div className="absolute z-10 mt-1 w-full bg-white border border-emerald150 rounded-md shadow-lg">
-          <div
-            onClick={() => handleSelect("facebook")}
+          {platformOptions.map((options: any) => (
+            <div
+            key={options?.id}
+            onClick={() => handleSelect(options?.name)}
             className="p-3 hover:bg-green-100 cursor-pointer text-gray-700"
           >
-            Facebook
+            {options?.name}
           </div>
-          <div
-            onClick={() => handleSelect("instagram")}
-            className="p-3 hover:bg-green-100 cursor-pointer text-gray-700"
-          >
-            Instagram
-          </div>
+          ))}
         </div>
       )}
     </div>

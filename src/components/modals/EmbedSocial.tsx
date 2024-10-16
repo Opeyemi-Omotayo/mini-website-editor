@@ -12,7 +12,7 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     url: "",
     code: "",
   });
-
+  console.log(isDisabled);
   const handleToggle = () => {
     setIsDisabled((prev) => !prev);
   };
@@ -21,7 +21,7 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setPlatform(value);
     setErrors((prev) => ({ ...prev, platform: "" }));
   };
-  
+
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
     setErrors((prev) => ({ ...prev, url: "" }));
@@ -46,13 +46,33 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     }
   };
 
+  const platformOptions = [
+    {
+      id: 1,
+      name: "Facebook"
+    },
+    {
+      id: 2,
+      name: "Instagram"
+    },
+    {
+      id: 3,
+      name: "Tiktok"
+    },
+  ]
+
   return (
     <ModalWrapper>
       <div className="mb-4">
         <p className="text-gray-500 mb-2 text-xs uppercase">
           social media platform
         </p>
-        <CustomDropdown platform={platform} errors={errors} handlePlatformChange={handlePlatformChange}/>
+        <CustomDropdown
+          platform={platform}
+          errors={errors}
+          handlePlatformChange={handlePlatformChange}
+          platformOptions={platformOptions}
+        />
         {errors.platform !== "" && (
           <p className="text-red-500 text-xs">{errors.platform}</p>
         )}
@@ -96,10 +116,14 @@ const EmbedSocial: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             checked={isDisabled}
             onChange={handleToggle}
           />
-          <div className="w-8 h-4 bg-gray-200 rounded-full shadow-inner"></div>
+          <div
+            className={`w-8 h-4 bg-gray-200 rounded-full shadow-inner ${
+              isDisabled ? " bg-green-600" : ""
+            }`}
+          />
           <div
             className={`absolute left-0 w-4 h-4 transition transform bg-white rounded-full shadow ${
-              isDisabled ? "translate-x-full bg-green-600" : ""
+              isDisabled ? " translate-x-full" : ""
             }`}
           ></div>
         </label>

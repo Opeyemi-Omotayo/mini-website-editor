@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
+import { FaCaretDown } from "react-icons/fa6";
 
 const CustomDropdown: React.FC<{
   platform: string;
@@ -26,7 +26,7 @@ const CustomDropdown: React.FC<{
         }`}
       >
         {selectedPlatform || "Select a platform"}
-        <IoIosArrowDown className="text-gray-400 ml-2" />
+        <FaCaretDown className="text-gray-600 ml-2" />
       </button>
 
       {isOpen && (
